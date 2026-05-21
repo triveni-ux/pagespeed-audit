@@ -1,0 +1,35 @@
+name: Tomorrow PageSpeed Audit
+
+on:
+  schedule:
+    - cron: '30 5 * * *'
+
+  workflow_dispatch:
+
+jobs:
+  run-pagespeed:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Packages
+        run: |
+          pip install pandas requests xlsxwriter openpyxl beautifulsoup4 lxml cloudscraper
+
+      - name: Run Script
+        run: python pagespeed_audit.py
+
+      - name: Upload Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: pagespeed-report
+          path: "*.xlsx"
+```
