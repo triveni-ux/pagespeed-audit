@@ -1,9 +1,6 @@
 name: Tomorrow PageSpeed Audit
 
 on:
-  schedule:
-    - cron: '30 5 * * *'
-
   workflow_dispatch:
 
 jobs:
@@ -11,7 +8,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
       - name: Checkout Repo
         uses: actions/checkout@v4
 
@@ -32,4 +28,3 @@ jobs:
         with:
           name: pagespeed-report
           path: "*.xlsx"
-```
